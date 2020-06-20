@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ProximaHeadLine1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">>@font/proxima_nova_bold</item>
+        <item name="android:fontFamily">@font/proxima_nova_bold</item>
+    </style>
+
+    <style name="ProximaHeadLine2" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">>@font/proxima_nova_bold</item>
+        <item name="android:textColor">@color/night</item>
+        <item name="fontWeight">800</item>
+        <item name="android:fontFamily">@font/proxima_nova_bold</item>
+    </style>
+
+    <style name="ProximaHeadLine3" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">>@font/proxima_nova_bold</item>
+        <item name="android:fontFamily">@font/proxima_nova_bold</item>
+    </style>
+
+    <style name="ProximaParagraph16" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">>@font/proxima_nova_reg</item>
+        <item name="android:fontFamily">@font/proxima_nova_reg</item>
+    </style>
+
+    <style name="ProximaSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">>@font/proxima_nova_reg</item>
+        <item name="android:fontFamily">@font/proxima_nova_reg</item>
+    </style>
+</resources>
