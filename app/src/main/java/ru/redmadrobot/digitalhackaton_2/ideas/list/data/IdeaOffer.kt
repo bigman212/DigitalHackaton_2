@@ -8,6 +8,11 @@ data class IdeaOffer(
     @field:Json(name = "id")
     val id: Int,
 
+
+    @field:Json(name = "user")
+    val user: User,
+
+
     @field:Json(name = "like_count")
     val likeCount: String,
     @field:Json(name = "comment_count")
@@ -26,6 +31,9 @@ data class IdeaOffer(
     @field:Json(name = "modified")
     val modified: String,
 
+    @field:Json(name = "themes_info")
+    val category: Category,
+
     @field:Json(name = "theme")
     val theme: String,
 
@@ -37,5 +45,13 @@ data class IdeaOffer(
 
     @field:Json(name = "themes")
     val themeId: Int
+)
+
+@JsonClass(generateAdapter = true)
+data class Category(
+    @field:Json(name = "id")
+    val id: Int,
+    @field:Json(name = "name")
+    val name: String
 )
 

@@ -3,6 +3,7 @@ package ru.redmadrobot.digitalhackaton_2.ideas.list
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.redmadrobot.digitalhackaton_2.App
 import ru.redmadrobot.digitalhackaton_2.base.BaseActivity
 import ru.redmadrobot.digitalhackaton_2.data.ResponseWithResult
@@ -21,9 +22,17 @@ class IdeaListActivity : BaseActivity() {
 
     private val binding: ActivityIdeaListBinding by viewBinding(ActivityIdeaListBinding::inflate)
 
+    val dataAdapter: IdeaListAdapter = IdeaListAdapter(mutableListOf())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.rvIdeas.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(applicationContext)
+            adapter = dataAdapter
+        }
     }
 
     override fun onStart() {
@@ -34,10 +43,7 @@ class IdeaListActivity : BaseActivity() {
             .map(ResponseWithResult<IdeaOffer>::results)
             .subscribe(
                 {
-                    it.forEach { idea ->
-                        val newString = idea.toString() + binding.textView.text
-                        binding.textView.text = newString + '\n'
-                    }
+                    dataAdapter.updateList(it)
                 },
                 {
                     showError(it)
