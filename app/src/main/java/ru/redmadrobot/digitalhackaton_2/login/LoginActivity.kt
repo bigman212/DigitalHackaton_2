@@ -4,12 +4,13 @@ import android.os.Bundle
 import ru.redmadrobot.digitalhackaton_2.App
 import ru.redmadrobot.digitalhackaton_2.base.BaseActivity
 import ru.redmadrobot.digitalhackaton_2.data.AuthToken
-import ru.redmadrobot.digitalhackaton_2.databinding.ActivityMainBinding
+import ru.redmadrobot.digitalhackaton_2.databinding.ActivityLoginBinding
 import ru.redmadrobot.digitalhackaton_2.extensions.*
+import ru.redmadrobot.digitalhackaton_2.ideas.list.IdeaListActivity
 import ru.redmadrobot.digitalhackaton_2.login.domain.LoginPresenter
 
-class MainActivity : BaseActivity() {
-    private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
+class LoginActivity : BaseActivity() {
+    private val binding: ActivityLoginBinding by viewBinding(ActivityLoginBinding::inflate)
     private lateinit var presenter: LoginPresenter
 
     private var easterEgg = 0
@@ -34,17 +35,26 @@ class MainActivity : BaseActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            hideKeyboard(currentFocus)
-            val username = binding.etLoginValue.fieldValue()
-            val password = binding.etPasswordValue.fieldValue()
-            presenter.login(username, password)
-            binding.pbLoading.showLoading()
+            val usernameEntered = binding.etLoginValue.fieldValue().isNotBlank()
+            val passwordEntered = binding.etPasswordValue.fieldValue().isNotBlank()
+            if (usernameEntered and passwordEntered) {
+                hideKeyboard(currentFocus)
+
+                val username = binding.etLoginValue.fieldValue()
+                val password = binding.etPasswordValue.fieldValue()
+                presenter.login(username, password)
+                binding.pbLoading.showLoading()
+            }
+            binding.tlLogin.error = if (usernameEntered) null else "Заполните поле"
+            binding.tlPassword.error = if (passwordEntered) null else "Заполните поле пароля"
         }
     }
 
     fun onLoginSuccess(token: AuthToken) {
         App.authToken = token
         binding.pbLoading.hideLoading()
+
+        startActivity(IdeaListActivity.createStarter(this))
     }
 
     fun onLoginFailed(error: Throwable) {
