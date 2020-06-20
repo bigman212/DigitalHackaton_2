@@ -1,0 +1,23 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnSurface">@color/asphalt</item>
+        <item name="android:textColor">@color/night</item>
+        <item name="android:textColorSecondary">@color/night</item>
+
+    </style>
+
+    <style name="LoginField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/asphalt</item>
+        <item name="colorControlNormal">@color/asphalt</item>
+        <item name="colorControlActivated">@color/azure</item>
+        <item name="android:textAppearance">@style/ProximaSubtitle1</item>
+        <item name="textAppearanceSubtitle1">@style/ProximaSubtitle1</item>
+    </style>
+
+
+</resources>
