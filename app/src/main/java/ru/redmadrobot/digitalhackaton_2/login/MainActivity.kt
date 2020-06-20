@@ -1,20 +1,23 @@
 package ru.redmadrobot.digitalhackaton_2.login
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import io.reactivex.Completable
+import ru.redmadrobot.digitalhackaton_2.App
+import ru.redmadrobot.digitalhackaton_2.base.BaseActivity
+import ru.redmadrobot.digitalhackaton_2.data.AuthToken
 import ru.redmadrobot.digitalhackaton_2.databinding.ActivityMainBinding
 import ru.redmadrobot.digitalhackaton_2.extensions.*
-import java.util.concurrent.TimeUnit
+import ru.redmadrobot.digitalhackaton_2.login.domain.LoginPresenter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
+    private lateinit var presenter: LoginPresenter
 
     private var easterEgg = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        presenter = LoginPresenter(this)
 
         binding.imgCompanyIcon.setOnClickListener {
             val neededEggs = 3
@@ -32,12 +35,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             hideKeyboard(currentFocus)
-            Completable.fromAction { binding.pbLoading.showLoading() }
-                .delay(5, TimeUnit.SECONDS)
-                .uiObserve()
-                .subscribe {
-                    binding.pbLoading.hideLoading()
-                }
+            val username = binding.etLoginValue.fieldValue()
+            val password = binding.etPasswordValue.fieldValue()
+            presenter.login(username, password)
+            binding.pbLoading.showLoading()
         }
+    }
+
+    fun onLoginSuccess(token: AuthToken) {
+        App.authToken = token
+        binding.pbLoading.hideLoading()
+    }
+
+    fun onLoginFailed(error: Throwable) {
+        showError(error)
+        binding.pbLoading.hideLoading()
     }
 }
