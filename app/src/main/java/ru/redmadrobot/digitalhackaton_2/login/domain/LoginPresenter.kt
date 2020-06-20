@@ -5,9 +5,9 @@ import ru.redmadrobot.digitalhackaton_2.base.BasePresenter
 import ru.redmadrobot.digitalhackaton_2.data.LoginRequest
 import ru.redmadrobot.digitalhackaton_2.extensions.ioSubscribe
 import ru.redmadrobot.digitalhackaton_2.extensions.uiObserve
-import ru.redmadrobot.digitalhackaton_2.login.MainActivity
+import ru.redmadrobot.digitalhackaton_2.login.LoginActivity
 
-class LoginPresenter(private val view: MainActivity) : BasePresenter() {
+class LoginPresenter(private val view: LoginActivity) : BasePresenter() {
     private val apiClient = App.api
 
     fun login(username: String, password: String) {

@@ -4,12 +4,12 @@ import android.os.Bundle
 import ru.redmadrobot.digitalhackaton_2.App
 import ru.redmadrobot.digitalhackaton_2.base.BaseActivity
 import ru.redmadrobot.digitalhackaton_2.data.AuthToken
-import ru.redmadrobot.digitalhackaton_2.databinding.ActivityMainBinding
+import ru.redmadrobot.digitalhackaton_2.databinding.ActivityLoginBinding
 import ru.redmadrobot.digitalhackaton_2.extensions.*
 import ru.redmadrobot.digitalhackaton_2.login.domain.LoginPresenter
 
-class MainActivity : BaseActivity() {
-    private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
+class LoginActivity : BaseActivity() {
+    private val binding: ActivityLoginBinding by viewBinding(ActivityLoginBinding::inflate)
     private lateinit var presenter: LoginPresenter
 
     private var easterEgg = 0
