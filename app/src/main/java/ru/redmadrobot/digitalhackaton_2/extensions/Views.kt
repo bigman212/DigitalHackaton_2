@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
@@ -43,4 +44,8 @@ val ViewBinding.resources: Resources
 
 fun Context.getCompatColor(@ColorRes id: Int): Int {
     return ContextCompat.getColor(this, id)
+}
+
+fun Activity.showToast(text: CharSequence, length: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(applicationContext, text, length).show()
 }
