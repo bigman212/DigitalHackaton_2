@@ -5,6 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import ru.redmadrobot.digitalhackaton_2.App
 
 object ApiClient {
     private const val BASE_URL = "https://breathtaking.herokuapp.com/"
@@ -25,6 +26,16 @@ object ApiClient {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor { chain ->
+                val request = chain.request()
+                App.authToken?.let { token ->
+                    val requestWithToken = request.newBuilder()
+                        .addHeader("Authorization", "Token ${token.value}")
+                        .build()
+                    chain.proceed(requestWithToken)
+                }
+                chain.proceed(request)
+            }
             .build()
     }
 
