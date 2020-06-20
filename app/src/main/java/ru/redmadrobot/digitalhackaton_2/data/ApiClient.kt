@@ -25,17 +25,17 @@ object ApiClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
             .addInterceptor { chain ->
                 val request = chain.request()
                 App.authToken?.let { token ->
                     val requestWithToken = request.newBuilder()
                         .addHeader("Authorization", "Token ${token.value}")
                         .build()
-                    chain.proceed(requestWithToken)
+                    return@addInterceptor chain.proceed(requestWithToken)
                 }
                 chain.proceed(request)
             }
+            .addInterceptor(loggingInterceptor)
             .build()
     }
 

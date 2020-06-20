@@ -8,11 +8,10 @@ import ru.redmadrobot.digitalhackaton_2.extensions.uiObserve
 import ru.redmadrobot.digitalhackaton_2.login.LoginActivity
 
 class LoginPresenter(private val view: LoginActivity) : BasePresenter() {
-    private val apiClient = App.api
 
     fun login(username: String, password: String) {
         val loginRequest = LoginRequest(username, password)
-        apiClient.login(loginRequest)
+        App.api.login(loginRequest)
             .ioSubscribe()
             .uiObserve()
             .subscribe(view::onLoginSuccess, view::onLoginFailed)
